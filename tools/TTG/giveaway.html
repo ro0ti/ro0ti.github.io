@@ -85,6 +85,7 @@
         <h1>TTG Giveaway</h1>
         <p>Enter each username into the list below:</p>
         <textarea id="entries" placeholder="Paste your list here, one entry per line..."></textarea>
+        <button id="gobackButton">Go Back</button>
         <button id="drawButton">Select Random Winner</button>
         <div id="result"></div>
     </div>
@@ -93,6 +94,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const entriesTextarea = document.getElementById('entries');
             const drawButton = document.getElementById('drawButton');
+            const gobackButton = document.getElementById('gobackButton');
             const resultDiv = document.getElementById('result');
             drawButton.addEventListener('click', function() {
                 const entriesText = entriesTextarea.value.trim();
@@ -119,6 +121,10 @@
                         selectWinner(entries);
                     }
                 }, 1000);
+            });
+
+            gobackButton.addEventListener('click', function() {
+                window.location.href = "../../index.html";
             });
             
             function selectWinner(entries) {

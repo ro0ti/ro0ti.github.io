@@ -1,37 +1,27 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Sidebar toggle
-    document.getElementById('sidebarCollapse').addEventListener('click', function() {
-        document.getElementById('sidebar').classList.toggle('active');
+    const files = [
+        { name: 'Giveaway Tool', type: 'Folder', date: '06-11-2025', size: '--', icon: 'folder', link: './tools/TTG/giveaway.html' }
+    ];
+    const fileList = document.getElementById('file-list');
+    files.forEach(file => {
+        const fileItem = document.createElement('div');
+        fileItem.className = 'file-item';
+        const iconClass = file.icon === 'folder' ? 'fas fa-folder' : `fas fa-${file.icon}`;
+        fileItem.innerHTML = `
+            <div class="file-name">
+                <a href="${file.link}" style="text-decoration:none;">
+                    <i class="${iconClass} file-icon"></i>
+                    <span>${file.name}</span>
+                </a>
+            </div>
+        `;
+        fileList.appendChild(fileItem);
     });
-
-    // Initialize chart
-    const ctx = document.getElementById('salesChart').getContext('2d');
-    const salesChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-            datasets: [{
-                label: 'Sales 2023',
-                data: [65, 59, 80, 81, 56, 55, 40],
-                backgroundColor: 'rgba(0, 123, 255, 0.2)',
-                borderColor: 'rgba(0, 123, 255, 1)',
-                borderWidth: 2,
-                tension: 0.4,
-                fill: true
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        item.addEventListener('click', function() {
+            navItems.forEach(i => i.classList.remove('active'));
+            this.classList.add('active');
+        });
     });
 });
